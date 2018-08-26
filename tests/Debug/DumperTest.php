@@ -13,7 +13,6 @@ use Psr\Log\LoggerInterface;
 use Spiral\Debug\Dumper;
 use Spiral\Debug\Renderer\ConsoleRenderer;
 use Spiral\Debug\Renderer\HtmlRenderer;
-use Spiral\Debug\Renderer\InvertedRenderer;
 use Spiral\Debug\Renderer\PlainRenderer;
 
 class DumperTest extends TestCase
