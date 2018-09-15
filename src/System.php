@@ -33,7 +33,7 @@ class System
         return false;
     }
 
-   /**
+    /**
      * Returns true if the STDOUT supports colorization.
      *
      * @codeCoverageIgnore
@@ -47,33 +47,30 @@ class System
             return true;
         }
 
-        if (\DIRECTORY_SEPARATOR === '\\') {
-            if (function_exists('sapi_windows_vt100_support')) {
-                try {
-                    if (@sapi_windows_vt100_support($stream)) {
-                        return true;
-                    }
-                } catch (\Throwable $e) {
-
-                }
+        try {
+            if (\DIRECTORY_SEPARATOR === '\\') {
+                return (
+                        function_exists('sapi_windows_vt100_support')
+                        && @sapi_windows_vt100_support($stream)
+                    ) || getenv('ANSICON') !== false
+                    || getenv('ConEmuANSI') == 'ON'
+                    || getenv('TERM') == 'xterm';
             }
 
-            return getenv('ANSICON') !== false
-                || getenv('ConEmuANSI') == 'ON'
-                || getenv('TERM') == 'xterm';
+            if (\function_exists('stream_isatty')) {
+                return @stream_isatty($stream);
+            }
+
+            if (\function_exists('posix_isatty')) {
+                return @posix_isatty($stream);
+            }
+
+            $stat = @fstat($stream);
+
+            // Check if formatted mode is S_IFCHR
+            return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
+        } catch (\Throwable $e) {
+            return false;
         }
-
-        if (\function_exists('stream_isatty')) {
-            return @stream_isatty($stream);
-        }
-
-        if (\function_exists('posix_isatty')) {
-            return @posix_isatty($stream);
-        }
-
-        $stat = @fstat($stream);
-
-        // Check if formatted mode is S_IFCHR
-        return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
     }
 }
