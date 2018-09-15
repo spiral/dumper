@@ -33,12 +33,12 @@ class System
         return false;
     }
 
-    /**
+   /**
      * Returns true if the STDOUT supports colorization.
      *
      * @codeCoverageIgnore
-     * @param mixed $stream
      * @link https://github.com/symfony/Console/blob/master/Output/StreamOutput.php#L94
+     * @param mixed $stream
      * @return bool
      */
     public static function isColorsSupported($stream = STDOUT): bool
