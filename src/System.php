@@ -48,14 +48,21 @@ class System
         }
 
         if (\DIRECTORY_SEPARATOR === '\\') {
-            return (
-                    \function_exists('sapi_windows_vt100_support')
-                    && @sapi_windows_vt100_support($stream)
-                )
-                || getenv('ANSICON') !== false
+            if (function_exists('sapi_windows_vt100_support')) {
+                try {
+                    if (@sapi_windows_vt100_support($stream)) {
+                        return true;
+                    }
+                } catch (\Throwable $e) {
+
+                }
+            }
+
+            return getenv('ANSICON') !== false
                 || getenv('ConEmuANSI') == 'ON'
                 || getenv('TERM') == 'xterm';
         }
+
         if (\function_exists('stream_isatty')) {
             return @stream_isatty($stream);
         }
