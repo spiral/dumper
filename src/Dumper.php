@@ -11,7 +11,7 @@ namespace Spiral\Debug;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
-use Spiral\Debug\Exceptions\DumperException;
+use Spiral\Debug\Exception\DumperException;
 use Spiral\Debug\Renderer\ConsoleRenderer;
 use Spiral\Debug\Renderer\HtmlRenderer;
 use Spiral\Debug\Renderer\PlainRenderer;

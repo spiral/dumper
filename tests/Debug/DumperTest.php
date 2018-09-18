@@ -121,7 +121,7 @@ class DumperTest extends TestCase
     }
 
     /**
-     * @expectedException \Spiral\Debug\Exceptions\DumperException
+     * @expectedException \Spiral\Debug\Exception\DumperException
      */
     public function testToLogException()
     {
@@ -130,7 +130,7 @@ class DumperTest extends TestCase
     }
 
     /**
-     * @expectedException \Spiral\Debug\Exceptions\DumperException
+     * @expectedException \Spiral\Debug\Exception\DumperException
      */
     public function testTargetException()
     {
@@ -179,7 +179,7 @@ class DumperTest extends TestCase
     }
 
     /**
-     * @expectedException \Spiral\Debug\Exceptions\DumperException
+     * @expectedException \Spiral\Debug\Exception\DumperException
      */
     public function testSetRenderer()
     {

@@ -6,7 +6,7 @@
  * @author    Anton Titov (Wolfy-J)
  */
 
-namespace Spiral\Debug\Exceptions;
+namespace Spiral\Debug\Exception;
 
 class DumperException extends \LogicException
 {
