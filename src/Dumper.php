@@ -342,10 +342,10 @@ class Dumper implements LoggerAwareInterface
 
         if (
             !($value instanceof \stdClass)
-            && strpos($p->getDocComment(), '@invisible') !== false
+            && strpos($p->getDocComment(), '@internal') !== false  
         ) {
-            //Memory loop while reading doc comment for stdClass variables?
-            //Report a PHP bug about treating comment INSIDE property declaration as doc comment.
+            // Memory loop while reading doc comment for stdClass variables?
+            // Report a PHP bug about treating comment INSIDE property declaration as doc comment.
             return '';
         }
 
