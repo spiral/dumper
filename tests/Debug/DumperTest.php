@@ -160,21 +160,21 @@ class DumperTest extends TestCase
         $this->assertNotContains('_kk_', $result);
     }
 
-    public function testInvisible()
+    public function testinternal()
     {
         $d = $this->makeDumper();
         $result = $d->dump(new class
         {
             protected $visible = '_kk_';
 
-            /** @invisible */
-            protected $invisible = '_ok_';
+            /** @internal */
+            protected $internal = '_ok_';
         }, Dumper::RETURN);
 
         $this->assertContains('visible', $result);
         $this->assertContains('_kk_', $result);
 
-        $this->assertNotContains('invisible', $result);
+        $this->assertNotContains('internal', $result);
         $this->assertNotContains('_ok_', $result);
     }
 
@@ -199,14 +199,14 @@ class DumperTest extends TestCase
             private $value = 123;
             protected $visible = '_kk_';
 
-            /** @invisible */
-            protected $invisible = '_ok_';
+            /** @internal */
+            protected $internal = '_ok_';
         }, Dumper::RETURN);
 
         $this->assertContains('visible', $result);
         $this->assertContains('_kk_', $result);
 
-        $this->assertNotContains('invisible', $result);
+        $this->assertNotContains('internal', $result);
         $this->assertNotContains('_ok_', $result);
     }
 
@@ -222,14 +222,14 @@ class DumperTest extends TestCase
             protected $visible = '_kk_';
             public $data = ['name' => 'value'];
 
-            /** @invisible */
-            protected $invisible = '_ok_';
+            /** @internal */
+            protected $internal = '_ok_';
         }, Dumper::RETURN);
 
         $this->assertContains('visible', $result);
         $this->assertContains('_kk_', $result);
 
-        $this->assertNotContains('invisible', $result);
+        $this->assertNotContains('internal', $result);
         $this->assertNotContains('_ok_', $result);
     }
 
@@ -245,14 +245,14 @@ class DumperTest extends TestCase
             protected $visible = '_kk_';
             public $data = ['name' => 'value'];
 
-            /** @invisible */
-            protected $invisible = '_ok_';
+            /** @internal */
+            protected $internal = '_ok_';
         }, Dumper::RETURN);
 
         $this->assertContains('visible', $result);
         $this->assertContains('_kk_', $result);
 
-        $this->assertNotContains('invisible', $result);
+        $this->assertNotContains('internal', $result);
         $this->assertNotContains('_ok_', $result);
     }
 
