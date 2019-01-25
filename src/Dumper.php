@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Spiral Framework.
  *
@@ -26,11 +27,11 @@ class Dumper implements LoggerAwareInterface
     /**
      * Directives for dump output forwarding.
      */
-    const OUTPUT = 0;
-    const RETURN = 1;
-    const LOGGER = 2;
-    const ERROR_LOG = 3;
-    const OUTPUT_CLI = 4;
+    const OUTPUT            = 0;
+    const RETURN            = 1;
+    const LOGGER            = 2;
+    const ERROR_LOG         = 3;
+    const OUTPUT_CLI        = 4;
     const OUTPUT_CLI_COLORS = 5;
 
     /** @var int */
@@ -201,7 +202,7 @@ class Dumper implements LoggerAwareInterface
         }
 
         //Value length
-        $length = strlen($value);
+        $length = strlen((string)$value);
 
         //Including type size
         $header .= $r->apply("{$type}({$length})", 'type', $type);
@@ -342,7 +343,8 @@ class Dumper implements LoggerAwareInterface
 
         if (
             !($value instanceof \stdClass)
-            && strpos($p->getDocComment(), '@internal') !== false  
+            && is_string($p->getDocComment())
+            && strpos($p->getDocComment(), '@internal') !== false
         ) {
             // Memory loop while reading doc comment for stdClass variables?
             // Report a PHP bug about treating comment INSIDE property declaration as doc comment.
