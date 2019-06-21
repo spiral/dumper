@@ -2,6 +2,7 @@
 [![Latest Stable Version](https://poser.pugx.org/spiral/dumper/version)](https://packagist.org/packages/spiral/dumper)
 [![Build Status](https://travis-ci.org/spiral/dumper.svg?branch=master)](https://travis-ci.org/spiral/dumper)
 [![Codecov](https://codecov.io/gh/spiral/dumper/branch/master/graph/badge.svg)](https://codecov.io/gh/spiral/dumper/)
+
 Dumper provides the ability to display the content of any given variable or object in a human readable form. Component support dumping
 into various outputs such as STDOUT, STDERR or log. Component support CLI colorization.
 
