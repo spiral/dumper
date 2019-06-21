@@ -6,7 +6,7 @@
 Dumper provides the ability to display the content of any given variable or object in a human readable form. Component support dumping
 into various outputs such as STDOUT, STDERR or log. Component support CLI colorization.
 
-## Example
+## Usage
 Installation:
 
 ```
@@ -57,6 +57,6 @@ $d->dump($variable, Debug\Dumper::STDERR);
 - component does not dump @internal properties
 - use `__debugInfo()` to specify custom set of data to display
 
-License:
+License
 --------
 The MIT License (MIT). Please see [`LICENSE`](./LICENSE) for more information. Maintained by [SpiralScout](https://spiralscout.com).
