@@ -15,33 +15,41 @@ $ composer require spiral/dumper
 In your code (works in web and cli SAPIs):
 
 ```php
-$d = new Spiral\Debug\Dumper();
+use Spiral\Debug;
+
+$d = new Debug\Dumper();
 $d->dump($variable);
 ```
 
 Dump to Log:
 
 ```php
-$d = new Spiral\Debug\Dumper($loggerInterface);
+use Spiral\Debug;
 
-$d->dump($variable, Dumper::LOGGER);
+$d = new Debug\Dumper($loggerInterface);
+
+$d->dump($variable, Debug\Dumper::LOGGER);
 ```
 
 Dump to STDERR:
 
 ```php
-$d = new Spiral\Debug\Dumper($loggerInterface);
+use Spiral\Debug;
 
-$d->dump($variable, Dumper::STDERR);
+$d = new Debug\Dumper($loggerInterface);
+
+$d->dump($variable, Debug\Dumper::STDERR);
 ```
 
 Force dump to STDERR with color support:
 
 ```php
-$d = new Spiral\Debug\Dumper($loggerInterface);
-$d->setRenderer(Dumper::STDERR, new Spiral\Debug\Renderer\ConsoleRenderer());
+use Spiral\Debug;
 
-$d->dump($variable, Dumper::STDERR);
+$d = new Debug\Dumper($loggerInterface);
+$d->setRenderer(Debug\Dumper::STDERR, new Debug\Renderer\ConsoleRenderer());
+
+$d->dump($variable, Debug\Dumper::STDERR);
 ```
 
 ## Notes
