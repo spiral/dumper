@@ -19,6 +19,7 @@ In your code (works in web and cli SAPIs):
 use Spiral\Debug;
 
 $d = new Debug\Dumper();
+
 $d->dump($variable);
 ```
 
