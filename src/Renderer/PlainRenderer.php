@@ -16,7 +16,7 @@ class PlainRenderer extends AbstractRenderer
     /**
      * @var bool
      */
-    private $escapeStrings = true;
+    private $escapeStrings = false;
 
     /**
      * @param bool $escapeStrings
