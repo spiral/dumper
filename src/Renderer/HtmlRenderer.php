@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Spiral Framework.
  *
  * @license   MIT
  * @author    Anton Titov (Wolfy-J)
  */
+declare(strict_types=1);
 
 namespace Spiral\Debug\Renderer;
 
@@ -13,7 +14,7 @@ use Spiral\Debug\RendererInterface;
 /**
  * HTML renderer with switchable color schemas.
  */
-class HtmlRenderer implements RendererInterface
+final class HtmlRenderer implements RendererInterface
 {
     /**
      * Default coloring schema.

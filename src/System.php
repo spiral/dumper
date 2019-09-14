@@ -1,17 +1,18 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Spiral Framework.
  *
  * @license   MIT
  * @author    Anton Titov (Wolfy-J)
  */
+declare(strict_types=1);
 
 namespace Spiral\Debug;
 
 /**
  * Describes the env PHP script is running within.
  */
-class System
+final class System
 {
     /**
      * Return true if PHP running in CLI mode.

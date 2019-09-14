@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Spiral Framework.
  *
  * @license   MIT
  * @author    Anton Titov (Wolfy-J)
  */
+declare(strict_types=1);
 
 namespace Spiral\Debug;
 
@@ -19,7 +20,7 @@ use Spiral\Debug\Renderer\PlainRenderer;
 /**
  * Renderer exports the content of the given variable, array or object into human friendly form.
  */
-class Dumper implements LoggerAwareInterface
+final class Dumper implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 

@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
 /**
  * Spiral Framework.
  *
  * @license   MIT
  * @author    Anton Titov (Wolfy-J)
  */
+declare(strict_types=1);
 
 namespace Spiral\Debug\Renderer;
 
@@ -13,7 +14,7 @@ use Codedungeon\PHPCliColors\Color;
 /**
  * Colorful styling for CLI dumps.
  */
-class ConsoleRenderer extends AbstractRenderer
+final class ConsoleRenderer extends AbstractRenderer
 {
     /**
      * Every dumped element is wrapped using this pattern.
