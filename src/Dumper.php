@@ -35,7 +35,7 @@ final class Dumper implements LoggerAwareInterface
     const OUTPUT_CLI_COLORS = 5;
 
     /** @var int */
-    private $maxLevel = 10;
+    private $maxLevel = 12;
 
     /**
      * Default render associations.
@@ -68,7 +68,7 @@ final class Dumper implements LoggerAwareInterface
      */
     public function setMaxLevel(int $maxLevel)
     {
-        $this->maxLevel = min($maxLevel, 1);
+        $this->maxLevel = max($maxLevel, 1);
     }
 
     /**
