@@ -1,10 +1,13 @@
 <?php
+
 /**
  * Spiral Framework.
  *
  * @license   MIT
  * @author    Anton Titov (Wolfy-J)
  */
+
+declare(strict_types=1);
 
 namespace Spiral\Debug\Tests;
 
@@ -17,7 +20,7 @@ use Spiral\Debug\Renderer\PlainRenderer;
 
 class DumperTest extends TestCase
 {
-    public function testOutput()
+    public function testOutput(): void
     {
         $d = $this->makeDumper();
 
@@ -28,7 +31,7 @@ class DumperTest extends TestCase
         $this->assertSame($d->dump(1, Dumper::RETURN), $result);
     }
 
-    public function testScalar()
+    public function testScalar(): void
     {
         $d = $this->makeDumper();
         $result = $d->dump(123, Dumper::RETURN);
@@ -36,7 +39,7 @@ class DumperTest extends TestCase
         $this->assertContains('123', $result);
     }
 
-    public function testString()
+    public function testString(): void
     {
         $d = $this->makeDumper();
         $result = $d->dump('hello world', Dumper::RETURN);
@@ -44,7 +47,7 @@ class DumperTest extends TestCase
         $this->assertContains('hello world', $result);
     }
 
-    public function testResource()
+    public function testResource(): void
     {
         $d = $this->makeDumper();
         $result = $d->dump(STDOUT, Dumper::RETURN);
@@ -53,7 +56,7 @@ class DumperTest extends TestCase
     }
 
 
-    public function testHTML()
+    public function testHTML(): void
     {
         $d = $this->makeDumper();
         $result = $d->dump('hello <br/>world', Dumper::RETURN);
@@ -61,7 +64,7 @@ class DumperTest extends TestCase
         $this->assertContains('hello &lt;br/&gt;world', $result);
     }
 
-    public function testArray()
+    public function testArray(): void
     {
         $d = $this->makeDumper();
         $result = $d->dump(['G', 'B', 'N'], Dumper::RETURN);
@@ -72,12 +75,11 @@ class DumperTest extends TestCase
         $this->assertContains('N', $result);
     }
 
-    public function testAnonClass()
+    public function testAnonClass(): void
     {
         $d = $this->makeDumper();
 
-        $result = $d->dump(new class
-        {
+        $result = $d->dump(new class() {
             private $name = 'Test';
         }, Dumper::RETURN);
 
@@ -88,11 +90,11 @@ class DumperTest extends TestCase
         $this->assertContains('test', $result);
     }
 
-    public function testClosure()
+    public function testClosure(): void
     {
         $d = $this->makeDumper();
 
-        $result = $d->dump(function () {
+        $result = $d->dump(function (): void {
             echo 'hello world';
         }, Dumper::RETURN);
 
@@ -100,7 +102,7 @@ class DumperTest extends TestCase
         $this->assertContains('DumperTest.php', $result);
     }
 
-    public function testToLog()
+    public function testToLog(): void
     {
         $mock = $this->createMock(LoggerInterface::class);
         $d = $this->makeDumper($mock);
@@ -109,21 +111,21 @@ class DumperTest extends TestCase
         $this->assertSame(null, $d->dump('abc', Dumper::LOGGER));
     }
 
-    public function testErrorLog()
+    public function testErrorLog(): void
     {
         $d = $this->makeDumper();
 
-        ini_set("error_log", "errors.log");
+        ini_set('error_log', 'errors.log');
         $this->assertSame(null, $d->dump('abc', Dumper::ERROR_LOG));
 
-        $this->assertContains("abc", file_get_contents("errors.log"));
-        unlink("errors.log");
+        $this->assertContains('abc', file_get_contents('errors.log'));
+        unlink('errors.log');
     }
 
     /**
      * @expectedException \Spiral\Debug\Exception\DumperException
      */
-    public function testToLogException()
+    public function testToLogException(): void
     {
         $d = $this->makeDumper();
         $this->assertSame(null, $d->dump('abc', Dumper::LOGGER));
@@ -132,18 +134,17 @@ class DumperTest extends TestCase
     /**
      * @expectedException \Spiral\Debug\Exception\DumperException
      */
-    public function testTargetException()
+    public function testTargetException(): void
     {
         $d = $this->makeDumper();
         $this->assertSame(null, $d->dump('abc', 9));
     }
 
-    public function testDebugInfo()
+    public function testDebugInfo(): void
     {
         $d = $this->makeDumper();
-        $result = $d->dump(new class
-        {
-            protected $_inner_ = '_kk_';
+        $result = $d->dump(new class() {
+            protected $inner = '_kk_';
 
             public function __debugInfo()
             {
@@ -151,20 +152,18 @@ class DumperTest extends TestCase
                     '_magic_' => '_value_'
                 ];
             }
-
         }, Dumper::RETURN);
 
         $this->assertContains('_magic_', $result);
         $this->assertContains('_value_', $result);
-        $this->assertNotContains('_inner_', $result);
+        $this->assertNotContains('inner', $result);
         $this->assertNotContains('_kk_', $result);
     }
 
-    public function testinternal()
+    public function testinternal(): void
     {
         $d = $this->makeDumper();
-        $result = $d->dump(new class
-        {
+        $result = $d->dump(new class() {
             protected $visible = '_kk_';
 
             /** @internal */
@@ -181,20 +180,19 @@ class DumperTest extends TestCase
     /**
      * @expectedException \Spiral\Debug\Exception\DumperException
      */
-    public function testSetRenderer()
+    public function testSetRenderer(): void
     {
         $d = $this->makeDumper();
         $d->setRenderer(8, new HtmlRenderer());
     }
 
-    public function testHtmlRenderer()
+    public function testHtmlRenderer(): void
     {
         $d = $this->makeDumper();
         $d->setRenderer(Dumper::RETURN, new HtmlRenderer());
 
-        $result = $d->dump(new class
-        {
-            protected static $static = "yes";
+        $result = $d->dump(new class() {
+            protected static $static = 'yes';
 
             private $value = 123;
             protected $visible = '_kk_';
@@ -210,14 +208,13 @@ class DumperTest extends TestCase
         $this->assertNotContains('_ok_', $result);
     }
 
-    public function testInvertedRenderer()
+    public function testInvertedRenderer(): void
     {
         $d = $this->makeDumper();
         $d->setRenderer(Dumper::RETURN, new HtmlRenderer(HtmlRenderer::INVERTED));
         $d->setMaxLevel(5);
 
-        $result = $d->dump(new class
-        {
+        $result = $d->dump(new class() {
             private $value = 123;
             protected $visible = '_kk_';
             public $data = ['name' => 'value'];
@@ -233,14 +230,13 @@ class DumperTest extends TestCase
         $this->assertNotContains('_ok_', $result);
     }
 
-    public function testConsoleRenderer()
+    public function testConsoleRenderer(): void
     {
         $d = $this->makeDumper();
         $d->setRenderer(Dumper::RETURN, new ConsoleRenderer());
         $d->setMaxLevel(5);
 
-        $result = $d->dump(new class
-        {
+        $result = $d->dump(new class() {
             private $value = 123;
             protected $visible = '_kk_';
             public $data = ['name' => 'value'];

@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Spiral Framework.
  *
  * @license   MIT
  * @author    Anton Titov (Wolfy-J)
  */
+
 declare(strict_types=1);
 
 namespace Spiral\Debug;
@@ -27,12 +29,12 @@ final class Dumper implements LoggerAwareInterface
     /**
      * Directives for dump output forwarding.
      */
-    const OUTPUT            = 0;
-    const RETURN            = 1;
-    const LOGGER            = 2;
-    const ERROR_LOG         = 3;
-    const OUTPUT_CLI        = 4;
-    const OUTPUT_CLI_COLORS = 5;
+    public const OUTPUT            = 0;
+    public const RETURN            = 1;
+    public const LOGGER            = 2;
+    public const ERROR_LOG         = 3;
+    public const OUTPUT_CLI        = 4;
+    public const OUTPUT_CLI_COLORS = 5;
 
     /** @var int */
     private $maxLevel = 12;
@@ -66,7 +68,7 @@ final class Dumper implements LoggerAwareInterface
      *
      * @param int $maxLevel
      */
-    public function setMaxLevel(int $maxLevel)
+    public function setMaxLevel(int $maxLevel): void
     {
         $this->maxLevel = max($maxLevel, 1);
     }
@@ -94,7 +96,7 @@ final class Dumper implements LoggerAwareInterface
 
             case self::LOGGER:
                 if ($this->logger == null) {
-                    throw new DumperException("Unable to dump value to log, no associated LoggerInterface");
+                    throw new DumperException('Unable to dump value to log, no associated LoggerInterface');
                 }
                 $this->logger->debug($dump);
                 break;
@@ -118,7 +120,7 @@ final class Dumper implements LoggerAwareInterface
     public function setRenderer(int $target, RendererInterface $renderer): Dumper
     {
         if (!isset($this->targets[$target])) {
-            throw new DumperException(sprintf("Undefined dump target %d", $target));
+            throw new DumperException(sprintf('Undefined dump target %d', $target));
         }
 
         $this->targets[$target] = $renderer;
@@ -145,7 +147,7 @@ final class Dumper implements LoggerAwareInterface
         }
 
         if (!isset($this->targets[$target])) {
-            throw new DumperException(sprintf("Undefined dump target %d", $target));
+            throw new DumperException(sprintf('Undefined dump target %d', $target));
         }
 
         if (is_string($this->targets[$target])) {

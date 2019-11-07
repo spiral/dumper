@@ -13,6 +13,7 @@ install:
   - composer install --no-interaction
 
 script:
+  - vedor/bin/spiral-cs check src tests functions.php
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 
 after_success:

@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Spiral Framework.
  *
  * @license   MIT
  * @author    Anton Titov (Wolfy-J)
  */
+
 declare(strict_types=1);
 
 namespace Spiral\Debug\Renderer;
@@ -19,7 +21,7 @@ final class HtmlRenderer implements RendererInterface
     /**
      * Default coloring schema.
      */
-    const DEFAULT = [
+    public const DEFAULT = [
         'body'     => '<pre style="background-color: white; font-family: monospace;">%s</pre>',
         'element'  => '<span style="%s;">%s</span>',
         'indent'   => '&middot;    ',
@@ -58,7 +60,7 @@ final class HtmlRenderer implements RendererInterface
     /**
      * Inverted coloring schema.
      */
-    const INVERTED = [
+    public const INVERTED = [
         'body'     => '<pre style="background-color: #232323; font-family: Monospace;">%s</pre>',
         'element'  => '<span style="%s;">%s</span>',
         'indent'   => '&middot;    ',
