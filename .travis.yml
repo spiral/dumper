@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 7.1
   - 7.2
   - 7.3
   - 7.4snapshot
@@ -13,7 +12,7 @@ install:
   - composer install --no-interaction
 
 script:
-  - vedor/bin/spiral-cs check src tests functions.php
+  - vendor/bin/spiral-cs check src tests functions.php
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
