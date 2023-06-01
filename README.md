@@ -6,6 +6,11 @@ With `spiral/dumper`, developers can easily inspect and analyze variable values 
 
 The component provides a wrapper over the `symfony/var-dumper` library. This component sends dumps directly to the browser within HTTP workers or to the `STDERR` output in other environments. 
 
+<p align="center">
+	<a href="https://spiral.dev/docs/basics-debug/3.7/en#spiral-dumper"><b>Documentation</b></a>
+</p>
+
+
 ## Usage
 
 Installation:
