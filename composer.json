@@ -21,7 +21,9 @@
   "require": {
     "php": ">= 8.1",
     "spiral/boot": "^3.7",
-    "symfony/var-dumper": "^6.1"
+    "symfony/var-dumper": "^6.1",
+    "psr/http-server-middleware": "^1.0",
+    "psr/http-factory": "^1.0"
   },
   "require-dev": {
     "vimeo/psalm": "^5.8"
@@ -29,7 +31,10 @@
   "autoload": {
     "psr-4": {
       "Spiral\\Debug\\": "src"
-    }
+    },
+    "files": [
+      "src/functions.php"
+    ]
   },
   "config": {
     "sort-packages": true

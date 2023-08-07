@@ -1,4 +1,5 @@
 # Spiral: Colorful variable dumper
+
 [![Latest Stable Version](https://poser.pugx.org/spiral/dumper/version)](https://packagist.org/packages/spiral/dumper)
 [![Codecov](https://codecov.io/gh/spiral/dumper/branch/master/graph/badge.svg)](https://codecov.io/gh/spiral/dumper/)
 
@@ -23,6 +24,29 @@ In your code:
 
 ```php
 dump($variable);
+```
+
+In an application using **RoadRunner**, you cannot use the `dd()` function. But the package provides an alternative `\rr\dd()` function.
+To use it, you need to add `Spiral\Debug\Middleware\DumperMiddleware` in the application, after `ErrorHandlerMiddleware`:
+
+```php
+use Spiral\Bootloader\Http\RoutesBootloader as BaseRoutesBootloader;
+use Spiral\Debug\Middleware\DumperMiddleware;
+use Spiral\Http\Middleware\ErrorHandlerMiddleware;
+
+final class RoutesBootloader extends BaseRoutesBootloader
+{
+    protected function globalMiddleware(): array
+    {
+        return [
+            ErrorHandlerMiddleware::class,
+            DumperMiddleware::class,
+            // ...
+        ];
+    }
+    
+    // ...
+}
 ```
 
 ## License
