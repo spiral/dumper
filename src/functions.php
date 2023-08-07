@@ -14,8 +14,14 @@ if (!\function_exists('\\rr\\dd')) {
         $exception = new DumpException();
         $dumper = new HtmlDumper();
 
+        /**
+         * @var mixed $var
+         */
         foreach ($vars as $var) {
-            $exception->addDump($dumper->dump((new VarCloner)->cloneVar($var), true));
+            $dump = $dumper->dump((new VarCloner)->cloneVar($var), true);
+            if ($dump !== null) {
+                $exception->addDump($dump);
+            }
         }
 
         throw $exception;

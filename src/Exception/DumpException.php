@@ -6,6 +6,9 @@ namespace Spiral\Debug\Exception;
 
 class DumpException extends \Exception
 {
+    /**
+     * @var array<string>
+     */
     private array $dumps = [];
 
     public function __construct(string $message = '', int $code = 500)
