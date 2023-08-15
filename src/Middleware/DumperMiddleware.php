@@ -11,6 +11,9 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Spiral\Debug\Exception\DumpException;
 
+/**
+ * To use this middleware, application must have implementations of psr/http-server-middleware and psr/http-factory.
+ */
 final class DumperMiddleware implements MiddlewareInterface
 {
     public function __construct(
