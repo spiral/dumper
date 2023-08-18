@@ -27,26 +27,9 @@ dump($variable);
 ```
 
 In an application using **RoadRunner**, you cannot use the `dd()` function. But the package provides an alternative `\rr\dd()` function.
-To use it, you need to add `Spiral\Debug\Middleware\DumperMiddleware` in the application, after `ErrorHandlerMiddleware`:
 
 ```php
-use Spiral\Bootloader\Http\RoutesBootloader as BaseRoutesBootloader;
-use Spiral\Debug\Middleware\DumperMiddleware;
-use Spiral\Http\Middleware\ErrorHandlerMiddleware;
-
-final class RoutesBootloader extends BaseRoutesBootloader
-{
-    protected function globalMiddleware(): array
-    {
-        return [
-            ErrorHandlerMiddleware::class,
-            DumperMiddleware::class,
-            // ...
-        ];
-    }
-    
-    // ...
-}
+\rr\dd($variable);
 ```
 
 ## License
