@@ -13,6 +13,11 @@
         <RedundantCastGivenDocblockType errorLevel="suppress" />
         <RedundantCondition errorLevel="suppress" />
         <DocblockTypeContradiction errorLevel="suppress" />
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Spiral\Bootloader\Http\HttpBootloader" />
+            </errorLevel>
+        </UndefinedClass>
     </issueHandlers>
     <projectFiles>
         <directory name="src" />
