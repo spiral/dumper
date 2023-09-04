@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Spiral\Debug\Bootloader;
 
-use Spiral\Boot\AbstractKernel;
 use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Debug\HtmlDumper;
-use Spiral\Bootloader\Http\HttpBootloader;
-use Spiral\Debug\Middleware\DumperMiddleware;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper as BaseHtmlDumper;
@@ -16,7 +13,7 @@ use Symfony\Component\VarDumper\VarDumper;
 
 final class DumperBootloader extends Bootloader
 {
-    public function init(AbstractKernel $kernel): void
+    public function init(): void
     {
         if (($_SERVER['VAR_DUMPER_FORMAT'] ?? null) !== null) {
             return;
@@ -35,10 +32,6 @@ final class DumperBootloader extends Bootloader
 
             $cliDumper->dump($cloner->cloneVar($var));
         });
-
-        if (\class_exists(HttpBootloader::class)) {
-            $kernel->booting($this->registerMiddleware(...));
-        }
     }
 
     private function makeHtmlDumper(): BaseHtmlDumper
@@ -60,10 +53,5 @@ final class DumperBootloader extends Bootloader
         }
 
         return new CliDumper(\STDERR);
-    }
-
-    private function registerMiddleware(HttpBootloader $http): void
-    {
-        $http->addMiddleware(DumperMiddleware::class);
     }
 }
