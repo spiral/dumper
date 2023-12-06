@@ -21,7 +21,7 @@
   "require": {
     "php": ">= 8.1",
     "spiral/boot": "^3.7",
-    "symfony/var-dumper": "^6.1"
+    "symfony/var-dumper": "^6.1 || ^7.0"
   },
   "require-dev": {
     "vimeo/psalm": "^5.14",
@@ -38,13 +38,6 @@
   },
   "config": {
     "sort-packages": true
-  },
-  "extra": {
-    "spiral": {
-      "bootloaders": [
-        "Spiral\\Debug\\Bootloader\\DumperBootloader"
-      ]
-    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true
